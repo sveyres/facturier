@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "../../home/sylvie/Code/django/facturier-env/facturier/app_facturier/static/sass/style.css",
+	"sources": [
+		"../../home/sylvie/Code/django/facturier-env/facturier/app_facturier/static/sass/style.scss"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,IAAI,CAAC;EACD,gBAAgB,EAAE,SAAS,GAC9B"
+}
