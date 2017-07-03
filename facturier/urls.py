@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.conf import settings
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('app_facturier.urls')),
-]
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^$', TemplateView.as_view(template_name = "homepage.html"), name="homepage"),
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

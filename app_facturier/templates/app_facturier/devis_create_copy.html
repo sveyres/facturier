@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Edit user{% endblock %}
+{% block content %}
+<a href="{% url "client-create" %}"><button type="button" name="button">Ajouter un nouveau client</button></a>
+<p>Client Existant :</p>
+<form action="" method="POST">
+{% csrf_token %}
+{{form.as_ul}}
+<p>Ligne</p>
+{{view.lines.as_ul}}
+<input type="submit" value="Créer"/>
+</form>
+<a href="{% url "line-create" %}"><button type="button" name="button">Ajouter une ligne</button></a>
+{% endblock %}
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

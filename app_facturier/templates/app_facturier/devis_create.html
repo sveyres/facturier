@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Edit user{% endblock %}
+{% block content %}
+<a href="{% url "client-create" %}"><button type="button" name="button">Ajouter un nouveau client</button></a>
+<p>Client Existant :</p>
+<form id="the_form" action="" method="POST">
+{% csrf_token %}
+{{form.as_p}}
+{{line_formset.management_form}}
+{% for inline_form in line_formset %}
+    <div class="plop">
+        {{inline_form}}
+    </div>
+{% endfor %}
+<input type="submit" name="" value="Enregistrer">
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="{% static "jquery.formset.js" %}"></script>
+<script type="text/javascript">
+   $(function() {
+       $('#the_form .plop').formset({
+           prefix: '{{ line_formset.prefix }}'
+       });
+   })
+</script>
+{% endblock extra_scripts %}

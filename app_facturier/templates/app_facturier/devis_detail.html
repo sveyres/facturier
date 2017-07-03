@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Details Devis{% endblock %}
+{% block content %}
+<div class="row">
+    <h2> Référence  : {{proposal.ref}}</h2>
+    <p> créé le {{ proposal.date_creation }}</p>
+    <p> Status {{ proposal.status.label }}</p>
+    <div class="panel panel-default">
+        <div class="panel-heading">Client :</div>
+        <div class="panel-body">
+        <p>{{ proposal.client }}</p>
+        <p>{{ proposal.client.adress_1 }}</p>
+        <p>{{ proposal.client.adress_2 }}</p>
+        <p>{{ proposal.client.zipcode }} {{ proposal.client.city }}</p>
+        <p>{{ proposal.client.country }}</p>
+        </div>
+  <div class="panel-footer">
+      <p>Contact :</p>
+      <p>{{ proposal.client.first_name }} {{ proposal.client.last_name }}</p>
+      <p> Tel : {{ proposal.client.phone }}</p>
+      <p> Mail : {{ proposal.client.mail }}</p>
+  </div>
+</div>
+</div>
+<div class="row">
+    <div class="text-right">
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+    <div class="panel-heading">Devis</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Désignation</th>
+                    <th>Temps restant</th>
+                    <th>Quantité</th>
+                    <th>Montant</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for l in proposal.line_set.all %}
+                <tr>
+                    <td>{{ l.designation }}</td>
+                    <td>6 mois</td>
+                    <td>{{ l.quantity }}</td>
+                    <th>{{ l.price }} €</th>
+                </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default text-center">
+    <div class="panel-heading"> Total</div>
+    <div class="panel-body"> {{ proposal.amount }} €</div>
+    </div>
+
+    <a href="{% url 'devis-validate' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> VALIDER LE DEVIS</button></a>
+    <a href="#"><button type="button" name="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ARCHIVER LE DEVIS</button></a>
+
+</div>
+{% endblock %}

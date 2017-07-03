@@ -7,11 +7,19 @@ from .models import *
 # Register your models here.
 
 
-class DevisAdmin(admin.ModelAdmin):
-    model = Devis
 
-admin.site.register(Devis, DevisAdmin)
 
+class LineInline(admin.TabularInline):
+    model = Line
+
+class ProposalAdmin(admin.ModelAdmin):
+    model = Proposal
+    inlines = [
+        LineInline,
+    ]
+
+admin.site.register(Proposal, ProposalAdmin)
+admin.site.register(Line)
 
 
 class ClientAdmin(admin.ModelAdmin):
@@ -19,6 +27,10 @@ class ClientAdmin(admin.ModelAdmin):
 
 admin.site.register(Client, ClientAdmin)
 
+class StatusAdmin(admin.ModelAdmin):
+    model = Status
+
+admin.site.register(Status, StatusAdmin)
 
 
 class ProfilInline(admin.StackedInline):

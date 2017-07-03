@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Edit user{% endblock %}
+{% block content %}
+<p>Client Existant :</p>
+<form action="" method="POST">
+{% csrf_token %}
+{{form.as_ul}}
+<input type="submit" value="Créer"/>
+</form>
+{% endblock %}
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

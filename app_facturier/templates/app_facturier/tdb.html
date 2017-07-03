@@ -1,0 +1,63 @@
+{% extends "homepage.html" %}
+
+{% block title %}TDB{% endblock %}
+{% block content %}
+
+    <a href="{% url 'devis-create' %}"><button type="link" name="button">Nouveau devis</button></a>
+    <h2 class="text-center">En cours</h2>
+    <div class="panel panel-default">
+    <div class="panel-heading text-center">Devis et factures</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reférence</th>
+                    <th>Date de création</th>
+                    <th>Temps restant</th>
+                    <th>Client</th>
+                    <th>Montant</th>
+                    <th>Valider</th>
+                    <th>Supprimer</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for proposal in proposals %}
+                <tr>
+                    <th><a href="{% url 'devis-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                    <td>{{ proposal.date_creation }}</td>
+                    <td>6 mois</td>
+                    <th>{{ proposal.client }}</th>
+                    <td>{{ proposal.amount }}</td>
+                    <td><a href="{% url 'devis-validate' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a></td>
+                    <td><a href="{% url 'devis-delete' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <!-- <div class="panel panel-default ">
+        <div class="panel-heading text-center">Factures</div>
+        <table class="table">
+            <thead>
+                <tr>
+                <th>Reférence</th>
+                <th>Date de création</th>
+                <th>Client</th>
+                <th>Montant</th>
+                <th>Valider</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <th>FS201706-01</th>
+                <td>22/06/2017</td>
+                <th>Entreprise 01</th>
+                <td>500 €</td>
+                <td><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+
+
+{% endblock %}
