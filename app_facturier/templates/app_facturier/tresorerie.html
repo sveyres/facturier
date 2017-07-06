@@ -1,0 +1,43 @@
+{% extends "homepage.html" %}
+
+{% block title %}TDB{% endblock %}
+{% block content %}
+
+    <a href="{% url 'proposal-create' %}"><button type="link" name="button">Nouveau devis</button></a>
+    <h2 class="text-center">Mon Trésors</h2>
+    <div class="panel panel-default">
+    <div class="panel-heading text-center">Factures Payées</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reférence</th>
+                    <th>Date de création</th>
+                    <th>Temps restant</th>
+                    <th>Client</th>
+                    <th>Montant</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for proposal in factPayee %}
+                <tr>
+                    <th><a href="{% url 'proposal-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                    <td>{{ proposal.date_creation }}</td>
+                    <td>6 mois</td>
+                    <th>{{ proposal.client }}</th>
+                    <td>{{ proposal.amount }} €</td>
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+    <div class="panel panel-default text-center">
+        <div class="panel-heading"> Total</div>
+        <div class="panel-body"> {{total}} €</div>
+    </div>
+
+
+{% endblock %}

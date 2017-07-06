@@ -3,10 +3,10 @@
 {% block title %}TDB{% endblock %}
 {% block content %}
 
-    <a href="{% url 'devis-create' %}"><button type="link" name="button">Nouveau devis</button></a>
+    <a href="{% url 'proposal-create' %}"><button type="link" name="button">Nouveau devis</button></a>
     <h2 class="text-center">En cours</h2>
     <div class="panel panel-default">
-    <div class="panel-heading text-center">Devis et factures</div>
+    <div class="panel-heading text-center">Devis</div>
         <table class="table">
             <thead>
                 <tr>
@@ -15,27 +15,41 @@
                     <th>Temps restant</th>
                     <th>Client</th>
                     <th>Montant</th>
-                    <th>Valider</th>
+                    <th>Gagné</th>
+                    <th>Perdu</th>
                     <th>Supprimer</th>
                 </tr>
             </thead>
             <tbody>
-            {% for proposal in proposals %}
+            {% for proposal in devEnCours %}
                 <tr>
-                    <th><a href="{% url 'devis-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                    <th><a href="{% url 'proposal-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
                     <td>{{ proposal.date_creation }}</td>
                     <td>6 mois</td>
                     <th>{{ proposal.client }}</th>
                     <td>{{ proposal.amount }}</td>
-                    <td><a href="{% url 'devis-validate' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></a></td>
-                    <td><a href="{% url 'devis-delete' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></a></td>
+                    <td>
+                        <form action="{% url 'proposal-change' ref=proposal.ref %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="ref" value="{{ proposal.ref }}" />
+                            <button type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'proposal-arch' ref=proposal.ref %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="ref" value="{{ proposal.ref }}" />
+                            <button type="submit"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        </form>
+                    </td>
+                    <td><a href="{% url 'proposal-delete' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></a></td>
                 </tr>
             {% endfor %}
 
             </tbody>
         </table>
     </div>
-    <!-- <div class="panel panel-default ">
+    <div class="panel panel-default ">
         <div class="panel-heading text-center">Factures</div>
         <table class="table">
             <thead>
@@ -48,16 +62,26 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th>FS201706-01</th>
-                <td>22/06/2017</td>
-                <th>Entreprise 01</th>
-                <td>500 €</td>
-                <td><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></td>
-                </tr>
+
+                {% for proposal in factEnCours %}
+                    <tr>
+                        <th><a href="{% url 'proposal-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                        <td>{{ proposal.date_creation }}</td>
+                        <th>{{ proposal.client }}</th>
+                        <td>{{ proposal.amount }}</td>
+                        <td>
+                            <form action="{% url 'proposal-arch' ref=proposal.ref %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="ref" value="{{ proposal.ref }}" />
+                                <button type="submit"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+
             </tbody>
         </table>
-    </div> -->
+    </div>
 
 
 {% endblock %}

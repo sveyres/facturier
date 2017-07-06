@@ -45,10 +45,18 @@ class Status(models.Model):
     class Meta:
         verbose_name_plural = "Status"
 
+STATUS_CHOICES = (
+    ("DEVEC", 'Devis en cours'),
+    ("FACEC", 'Facture en cours'),
+    ("DPERD", 'Perdu'),
+    ("FPAYE", 'Payé'),
+)
+
 class Proposal(models.Model):
     client = models.ForeignKey(Client)
     profile = models.ForeignKey(Profile)
-    status = models.ForeignKey(Status)
+    # status = models.ForeignKey(Status)
+    status = models.CharField(max_length=150, choices=STATUS_CHOICES)
     ref = models.CharField(max_length=20, unique=True)
     date_creation = models.DateTimeField(auto_now_add=True)
     date_refusal = models.DateTimeField(null=True, blank=True)
@@ -60,9 +68,6 @@ class Proposal(models.Model):
         for l in self.line_set.all():
             result += l.quantity * l.price
         return result
-
-    def in_category(self, status):
-        return things.filter(status=category)
 
     def __unicode__(self):
        return self.ref

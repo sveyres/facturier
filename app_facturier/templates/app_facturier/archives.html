@@ -1,0 +1,64 @@
+{% extends "homepage.html" %}
+
+{% block title %}TDB{% endblock %}
+{% block content %}
+
+    <a href="{% url 'proposal-create' %}"><button type="link" name="button">Nouveau devis</button></a>
+    <h2 class="text-center">Devis et Facture archivés</h2>
+    <div class="panel panel-default">
+    <div class="panel-heading text-center">Devis Perdus</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reférence</th>
+                    <th>Client</th>
+                    <th>Date de création</th>
+                    <th>Date de perdition</th>
+                    <th>Montant</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for proposal in devPerdus %}
+                <tr>
+                    <th><a href="{% url 'proposal-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                    <th>{{ proposal.client }}</th>
+                    <td>{{ proposal.date_creation }}</td>
+                    <td>{{ proposal.date_refusal }}</td>
+                    <td>{{ proposal.amount }} €</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-default">
+    <div class="panel-heading text-center">Factures Payées</div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Reférence</th>
+                    <th>Client</th>
+                    <th>Date de création</th>
+                    <th>Date de payationnage</th>
+                    <th>Montant</th>
+
+                </tr>
+            </thead>
+            <tbody>
+            {% for proposal in factPayee %}
+                <tr>
+                    <th><a href="{% url 'proposal-detail' proposal.ref %}">{{ proposal.ref }}</a></th>
+                    <th>{{ proposal.client }}</th>
+                    <td>{{ proposal.date_creation }}</td>
+                    <td>à coder...</td>
+                    <td>{{ proposal.amount }} €</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock %}

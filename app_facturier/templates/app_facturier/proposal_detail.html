@@ -60,8 +60,6 @@
     <div class="panel-body"> {{ proposal.amount }} €</div>
     </div>
 
-    <a href="{% url 'devis-validate' proposal.ref %}"><button type="button" name="button"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span> VALIDER LE DEVIS</button></a>
-    <a href="#"><button type="button" name="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ARCHIVER LE DEVIS</button></a>
-
+    <a href="{% url 'proposal-validate' proposal.ref %}"><button type="button" name="button">Editer</span></button></a>
 </div>
 {% endblock %}
