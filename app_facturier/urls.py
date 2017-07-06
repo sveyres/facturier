@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^(?P<ref>[\w-]+)/arch$', arch_proposal, name="proposal-arch"),
     url(r'^tresorerie/$', TresListView.as_view(), name="tresorerie"),
     url(r'^archives/$', ArchListView.as_view(), name="archives"),
-
+    url(r'^(?P<slug>[\w-]+)$', ProposalDetailView.as_view(), name="proposal-detail"),
 ]
