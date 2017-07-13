@@ -62,6 +62,7 @@ class Proposal(models.Model):
     date_refusal = models.DateTimeField(null=True, blank=True)
     date_acceptance = models.DateTimeField(null=True, blank=True)
     date_payment = models.DateTimeField(null=True, blank=True)
+    mail_reminder_date = models.DateTimeField(null=True, blank=True)
 
     def amount(self):
         result = 0

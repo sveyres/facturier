@@ -33,6 +33,7 @@ class Command(BaseCommand):
                         proposal.status = "DEVEC"
                     else : #id.startswith("F")
                         proposal.status = "FACEC"
+                        proposal.date_acceptance = creation_date
 
                 elif status == "LOST":
                     update_date = datetime.strptime(update_date, '%d/%m/%y %H:%M')

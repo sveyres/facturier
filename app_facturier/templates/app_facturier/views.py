@@ -121,7 +121,7 @@ class ArchListView(ListView):
 
 
 def change_status(request, ref):
-    now = datetime.datetime.now()
+    now = datetime.now()
     prop = Proposal.objects.get(ref=ref)
     prop.status = "FACEC"
     prop.date_acceptance = now
