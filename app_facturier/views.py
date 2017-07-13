@@ -18,12 +18,13 @@ class ClientCreateView(CreateView):
     template_name = "app_facturier/client_create.html"
     success_url = reverse_lazy('proposal-create')
 
-
 class ClientListView(ListView):
     model = Client
     context_object_name = "clients"
 
-
+class ClientDetailView(DetailView):
+    model = Client
+    slug_field = "enterprise"
 
 
 class ProposalDetailView(DetailView):

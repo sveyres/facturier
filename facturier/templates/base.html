@@ -27,7 +27,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             </button>
-                        <a class="navbar-brand" href="#">Facturier</a>
+                        <a class="navbar-brand" href="/">Facturier</a>
                         </div>
 
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -35,7 +35,6 @@
                             <ul class="nav navbar-nav">
                                 {% if request.user.is_authenticated %}
                                 <li><a href="{% url "tdb" %}">tdb</a></li>
-                                <li class="active"><a href="/"> Home <span class="sr-only">(current)</span></a></li>
                                 <li><a href="{% url "tresorerie" %}"> Trésorerie <span class="sr-only">(current)</span></a></li>
                                 <li><a href="{% url "archives" %}"> Archives <span class="sr-only">(current)</span></a></li>
                                 <li><a href="{% url "list-clients" %}"> Liste clients <span class="sr-only">(current)</span></a></li>
